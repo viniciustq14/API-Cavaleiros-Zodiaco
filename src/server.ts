@@ -23,7 +23,7 @@ app.use('/', routes);
 
 app.use((req: Request, res: Response, next: NextFunction) => {
   const error = new Error('not found');
-  
+
   return res.status(404).json({
     ...error,
   })
