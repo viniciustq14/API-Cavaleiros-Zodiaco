@@ -7,6 +7,7 @@ router.get('/cavaleiros', cavaleiros.listar.bind(cavaleiros));
 router.get('/cavaleiro/:id', cavaleiros.encontrar.bind(cavaleiros));
 router.post('/cavaleiros/novo', cavaleiros.adicionar.bind(cavaleiros));
 router.post('/cavaleiros/editar/:id', cavaleiros.editar.bind(cavaleiros));
+router.post('/cavaleiros/salvar_todos', cavaleiros.adicionarEmLote.bind(cavaleiros));
 router.get('/cavaleiros/excluir/:id', cavaleiros.excluir.bind(cavaleiros));
 
 export = router;
