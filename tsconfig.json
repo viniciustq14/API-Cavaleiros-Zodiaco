@@ -8,5 +8,7 @@
         "target": "ES6",
         "skipLibCheck": true,
         "strict": true,
+        "lib": ["esnext"],
+        "sourceMap": true,
     }
 }
