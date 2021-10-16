@@ -1,5 +1,5 @@
 import Prisma from '../db/prismaClient';
-import ICavaleiro from '../Interfaces/CavaleiroI';
+import ICavaleiro from '../Interfaces/ICavaleiro';
 
 class CavaleiroModel {
   public listar() {
