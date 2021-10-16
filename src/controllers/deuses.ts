@@ -1,15 +1,15 @@
 import { Request, Response, NextFunction } from 'express';
-import CavaleiroModel from '../model/cavaleiroModel';
-import ICavaleiro from '../Interfaces/ICavaleiro';
+import deusModel from '../model/deusModel';
+import IDeus from '../Interfaces/IDeus';
 
-class Cavaleiro {
+class Deus {
   public async listar (req: Request, res: Response, next: NextFunction) {
     try {
       
-      const cavaleiros = await CavaleiroModel.listar();
+      const deuses = await deusModel.listar();
 
       res.status(200).json({
-        cavaleiros,
+        deuses,
       });
     } catch (error) {
       next(error);
@@ -20,10 +20,10 @@ class Cavaleiro {
     try {
       const { id } = req.params;
 
-      const cavaleiro = await CavaleiroModel.encontrar(Number(id));
+      const deus = await deusModel.encontrar(Number(id));
 
       res.status(200).json({
-        cavaleiro,
+        deus,
       });
     } catch (error) {
       next(error);
@@ -34,22 +34,14 @@ class Cavaleiro {
     try {
       const {
         nome,
-        casa,
-        armadura,
-        seculo,
-        exercito,
       } = req.body;
 
-     await CavaleiroModel.salvar({
+     await deusModel.salvar({
         nome,
-        casa,
-        armadura,
-        seculo,
-        exercito,
       });
 
       res.status(201).json({
-        message: 'Novo Cavaleiro Adicionado',
+        message: 'Novo Deus Adicionado',
       });
     } catch (error) {
       next(error);
@@ -58,14 +50,14 @@ class Cavaleiro {
 
   public async adicionarEmLote (req: Request, res: Response, next: NextFunction) {
     try {
-      const { cavaleiros } = req.body;
+      const { deuses } = req.body;
 
-      const cavaleirosInsert = cavaleiros.map((cavaleiro: ICavaleiro) => CavaleiroModel.salvar(cavaleiro))
+      const deusesInsert = deuses.map((deus: IDeus) => deusModel.salvar(deus));
       
-      await Promise.all(cavaleirosInsert);
+      await Promise.all(deusesInsert);
 
       res.status(201).json({
-        message: "Todos cavaleiros adicionados",
+        message: "Todos deuses adicionados",
       });
     } catch (error) {
       next(error);
@@ -77,25 +69,17 @@ class Cavaleiro {
 
       const {
         nome,
-        casa,
-        armadura,
-        seculo,
-        exercito,
       } = req.body;
 
       
-      const cavaleiro = {
+      const deus = {
         nome,
-        casa,
-        armadura,
-        seculo,
-        exercito,
       };
       
-      await CavaleiroModel.editar(Number(id), cavaleiro)
+      await deusModel.editar(Number(id), deus);
 
       res.status(200).json({
-        message: 'Cavaleiro Editado',
+        message: 'Deus Editado',
       });
     } catch (error) {
       next(error);
@@ -106,10 +90,10 @@ class Cavaleiro {
     try {
       const { id } = req.params;
       
-      await CavaleiroModel.excluir(Number(id))
+      await deusModel.excluir(Number(id))
 
       res.status(200).json({
-        message: "Cavaleiro Excluído",
+        message: "Deus Excluído",
       });
     } catch (error) {
       next(error);
@@ -117,4 +101,4 @@ class Cavaleiro {
   }
 }
 
-export default new Cavaleiro();
+export default new Deus();

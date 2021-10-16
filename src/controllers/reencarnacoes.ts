@@ -1,15 +1,15 @@
 import { Request, Response, NextFunction } from 'express';
-import CavaleiroModel from '../model/cavaleiroModel';
-import ICavaleiro from '../Interfaces/ICavaleiro';
+import reencarnacaoModel from '../model/reencarnacaoModel';
+import IReencarnacao from '../Interfaces/IReencarnacao';
 
-class Cavaleiro {
+class reencarnacao {
   public async listar (req: Request, res: Response, next: NextFunction) {
     try {
       
-      const cavaleiros = await CavaleiroModel.listar();
+      const reencarnacoes = await reencarnacaoModel.listar();
 
       res.status(200).json({
-        cavaleiros,
+        reencarnacoes,
       });
     } catch (error) {
       next(error);
@@ -20,10 +20,10 @@ class Cavaleiro {
     try {
       const { id } = req.params;
 
-      const cavaleiro = await CavaleiroModel.encontrar(Number(id));
+      const reencarnacao = await reencarnacaoModel.encontrar(Number(id));
 
       res.status(200).json({
-        cavaleiro,
+        reencarnacao,
       });
     } catch (error) {
       next(error);
@@ -34,22 +34,18 @@ class Cavaleiro {
     try {
       const {
         nome,
-        casa,
-        armadura,
+        deus,
         seculo,
-        exercito,
       } = req.body;
 
-     await CavaleiroModel.salvar({
+     await reencarnacaoModel.salvar({
         nome,
-        casa,
-        armadura,
+        deus,
         seculo,
-        exercito,
       });
 
       res.status(201).json({
-        message: 'Novo Cavaleiro Adicionado',
+        message: 'Nova reencarnação Adicionado',
       });
     } catch (error) {
       next(error);
@@ -58,14 +54,14 @@ class Cavaleiro {
 
   public async adicionarEmLote (req: Request, res: Response, next: NextFunction) {
     try {
-      const { cavaleiros } = req.body;
+      const { reencarnacoes } = req.body;
 
-      const cavaleirosInsert = cavaleiros.map((cavaleiro: ICavaleiro) => CavaleiroModel.salvar(cavaleiro))
+      const reencarnacoesInsert = reencarnacoes.map((reencarnacao: IReencarnacao) => reencarnacaoModel.salvar(reencarnacao))
       
-      await Promise.all(cavaleirosInsert);
+      await Promise.all(reencarnacoesInsert);
 
       res.status(201).json({
-        message: "Todos cavaleiros adicionados",
+        message: "Todas reencarnações adicionados",
       });
     } catch (error) {
       next(error);
@@ -77,25 +73,21 @@ class Cavaleiro {
 
       const {
         nome,
-        casa,
-        armadura,
+        deus,
         seculo,
-        exercito,
       } = req.body;
 
       
-      const cavaleiro = {
+      const reencarnacao = {
         nome,
-        casa,
-        armadura,
+        deus,
         seculo,
-        exercito,
       };
       
-      await CavaleiroModel.editar(Number(id), cavaleiro)
+      await reencarnacaoModel.editar(Number(id), reencarnacao)
 
       res.status(200).json({
-        message: 'Cavaleiro Editado',
+        message: 'Reencarnação Editado',
       });
     } catch (error) {
       next(error);
@@ -106,10 +98,10 @@ class Cavaleiro {
     try {
       const { id } = req.params;
       
-      await CavaleiroModel.excluir(Number(id))
+      await reencarnacaoModel.excluir(Number(id))
 
       res.status(200).json({
-        message: "Cavaleiro Excluído",
+        message: "Reencarnação Excluído",
       });
     } catch (error) {
       next(error);
@@ -117,4 +109,4 @@ class Cavaleiro {
   }
 }
 
-export default new Cavaleiro();
+export default new reencarnacao();
