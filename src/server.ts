@@ -1,7 +1,7 @@
 import http from 'http';
 import express, { Express, Request, Response, NextFunction } from 'express';
 import morgan from 'morgan';
-import routes from './routes/cavaleiros';
+import routes from './routes';
 
 const app: Express = express();
 
