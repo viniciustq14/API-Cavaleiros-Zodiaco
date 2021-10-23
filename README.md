@@ -3,4 +3,4 @@
 
  Os CRUD das entidades Cavaleiros, Deuses e as Reencarnações foram feitos de forma simples usando models para controlar os dados.
 
- O Prisma é o ORM usado para criar os modelos e seus relacionamentos, tendo o sqlite como bando.
+ O Prisma é o ORM usado para criar os modelos e seus relacionamentos, tendo o sqlite como banco.
